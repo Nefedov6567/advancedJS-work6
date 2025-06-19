@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Интернет-магазин на Vue</title>
+    <style>
+        .goods-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .goods-item {
+            border: 1px solid #ccc;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .goods-item h3 {
+            margin: 0 0 10px;
+        }
+
+        .goods-item button {
+            padding: 5px 10px;
+        }
+
+        #cart-block {
+            margin-top: 30px;
+
+        }
+
+
+        .error {
+            color: red;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <!-- Компонент поиска -->
+        <search-bar :search-line="searchLine" @search="filterGoods"></search-bar>
+
+        <!-- Сообщение об ошибке (если не удалось получить данные) -->
+        <error-msg v-if="error"></error-msg>
+
+        <h1>Каталог товаров</h1>
+
+        <!-- Компонент списка товаров -->
+        <goods-list :goods="filteredGoods" @add-to-cart="addToCart"></goods-list>
+
+        <!-- Компонент корзины -->
+        <cart-block v-bind:items="cartItems" @remove="removeFromCart"></cart-block>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
